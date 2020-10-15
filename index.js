@@ -39,9 +39,52 @@ Airplane.prototype.land = function () {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-function Person() {
+function Person(object) {
+
+  this.age = object.age;
+  this.name = object.name;
+  this.stomach = object.stomach;
 
 }
+
+const maryObj = new Person({
+  age: 50,
+  name: 'Mary',
+  stomach: []
+});
+
+
+Person.prototype.toString = function() {
+  return `${this.name}, ${this.age}`;
+}
+
+Person.prototype.eat = function(edible) {
+  if ( this.stomach.length < 10 ) {
+    this.stomach.push(edible)
+    return (this.stomach);
+  }
+  else if( this.stomach.length === 10) {
+    return('I gotta go to the bathroom');
+  } 
+  else {
+    return('Eat function not working');
+  }
+}
+
+Person.prototype.poop = function() {
+  if ( this.stomach.length === 10 ) {
+    this.stomach.length = 0
+    console.log('that felt great');
+    return(this.stomach);
+  } else {
+    return('Poop function not working');
+  }
+}
+
+maryObj.toString();
+maryObj.eat('pizza');
+maryObj.poop();
+
 
 /*
   TASK 2
@@ -50,6 +93,9 @@ function Person() {
         + should initialize with an `tank` at 0
         + should initialize with an `odometer` at 0
     - Give cars the ability to get fueled with a `.fill(gallons)` method. Add the gallons to `tank`.
+
+
+
     - STRETCH: Give cars ability to `.drive(distance)`. The distance driven:
         + Should cause the `odometer` to go up.
         + Should cause the the `tank` to go down taking `milesPerGallon` into account.
@@ -57,9 +103,29 @@ function Person() {
         + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
 */
 
-function Car() {
+function Car(object) {
+
+  this.model = object.model;
+  this.milesPerGallon = object.milesPerGallon;
+
+  this.tank = 0;
+  this.odometer = 0;
 
 }
+
+Car.prototype.fill = function (gallons) {
+
+  this.tank =+ this.tank + gallons
+  return `${this.tank} Gallons` ;
+
+}
+
+const carObj = new Car({
+  model: '2006 Koenigsegg CCX',
+  milesPerGallon: 13.84,
+}) 
+
+// carObj
 
 /*
   TASK 3
